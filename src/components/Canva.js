@@ -1,46 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Stage, Layer, Rect, Text } from "react-konva";
 
 
-const DUMMY_DATA = [
-  {
-    robot_id: Math.floor(Math.random() * 10),
-    grid_number: Math.floor(Math.random() * 8) + 1,
-    ststus: "active",
-  },
-  {
-    robot_id: Math.floor(Math.random() * 10),
-    grid_number: Math.floor(Math.random() * 8) + 1,
-    ststus: "disabled",
-  },
-  {
-    robot_id: Math.floor(Math.random() * 10),
-    grid_number: Math.floor(Math.random() * 8) + 1,
-    ststus: "",
-  },
-];
+// const DUMMY_DATA = [
+//   {
+//     robot_id: Math.floor(Math.random() * 10),
+//     grid_number: Math.floor(Math.random() * 8) + 1,
+//     ststus: "active",
+//   },
+//   {
+//     robot_id: Math.floor(Math.random() * 10),
+//     grid_number: Math.floor(Math.random() * 8) + 1,
+//     ststus: "disabled",
+//   },
+//   {
+//     robot_id: Math.floor(Math.random() * 10),
+//     grid_number: Math.floor(Math.random() * 8) + 1,
+//     ststus: "",
+//   },
+// ];
 
 const robotStatus = [
    {
-     id : "1",
+     id : 1,
      status : "red",
      roboID: "34",
    },
    {
-    id : "4",
+    id : 4,
     status: "green",
     roboID: "88",
    },
 
    {
-    id : "6",
+    id : 6,
     status: "gray",
     roboID: "76",
    },
 
    {
-    id: "3",
+    id: 3,
     status: "green",
     roboID:"66"
    },
@@ -48,7 +48,7 @@ const robotStatus = [
 ];
 
 const Canva = () => {
-  const [selectedId, setSelectedId] = useState("0");
+  
 
   const [roboID , setRoboId] = useState("0");
 
@@ -71,16 +71,17 @@ const Canva = () => {
     )
   })
   // console.log(robotF);
-  setInterval(() => {
+  let [selectedId, setSelectedId] = useState(1);
+  useEffect(()=> {
+    if(selectedId<=9){}
+    const interval = setInterval(()=>{
+      setSelectedId((prevId)=> prevId+1);
+    },2000);
     
-  }, 3000);
-      
-for (let index = 0; index < robotStatus.length; index++) {
-  const id = robotStatus[index].id;
-  const color = robotStatus[index].status;
-
-  
-}
+    return () => clearInterval(interval);
+  },[])
+  console.log(selectedId);
+// console.log(robotStatus);
 
   return (
     <>
@@ -104,11 +105,10 @@ for (let index = 0; index < robotStatus.length; index++) {
               width={200}
               height={200}
               // fill={selectedId === "1" ?"black" : "#F9E79F"}
-              fill = {selectedId === robotStatus[0].id? robotF[1]:"#F9E79F"}
+              fill = {selectedId === robotStatus[0].id?  robotStatus[1].status:"#F9E79F"}
               text ={robotStatus[0].roboID}
               id = "1"
-              
-            >
+              >
         
             </Rect>
           </Layer>
@@ -125,7 +125,7 @@ for (let index = 0; index < robotStatus.length; index++) {
               height={200}
               onClick={highlightHandler}
               // fill={selectedId === "2" ? "black" : "#F9E79F"}
-              fill = {selectedId === 2 ? robotF[0]:"#F9E79F"}
+              fill = {selectedId === "2" ? robotStatus[1].status:"#F9E79F"}
               
               id="2"
               
@@ -143,7 +143,7 @@ for (let index = 0; index < robotStatus.length; index++) {
               width={200}
               height={200}
               onClick={highlightHandler}
-              fill={selectedId === "3" ? robotStatus[1].status : "#F9E79F"}
+              fill={selectedId === 3 ? robotStatus[1].status : "#F9E79F"}
               id="3"
             ></Rect>
           </Layer>
@@ -159,7 +159,7 @@ for (let index = 0; index < robotStatus.length; index++) {
               width={200}
               height={200}
               onClick={highlightHandler}
-              fill={selectedId === "4" ? robotF[2] : "#F9E79F"}
+              fill={selectedId === 4 ? robotF[2] : "#F9E79F"}
               id="4"
             ></Rect>
           </Layer>
@@ -175,7 +175,7 @@ for (let index = 0; index < robotStatus.length; index++) {
               width={200}
               height={200}
               onClick={highlightHandler}
-              fill={selectedId === "5" ? robotStatus[0].status : "#F9E79F"}
+              fill={selectedId === "5"? robotStatus[0].status : "#F9E79F"}
               id="5"
             ></Rect>
           </Layer>
@@ -191,7 +191,7 @@ for (let index = 0; index < robotStatus.length; index++) {
               width={200}
               height={200}
               onClick={highlightHandler}
-              fill={selectedId === "6" ? robotStatus[1].status : "#F9E79F"}
+              fill={selectedId === 6 ? robotStatus[1].status : "#F9E79F"}
               id="6"
             ></Rect>
           </Layer>
@@ -207,7 +207,7 @@ for (let index = 0; index < robotStatus.length; index++) {
               width={200}
               height={200}
               onClick={highlightHandler}
-              fill={selectedId === "7" ? robotStatus[1].status : "#F9E79F"}
+              fill={selectedId === 7 ? robotStatus[1].status : "#F9E79F"}
               id="7"
             ></Rect>
           </Layer>
@@ -223,7 +223,7 @@ for (let index = 0; index < robotStatus.length; index++) {
               width={200}
               height={200}
               onClick={highlightHandler}
-              fill={selectedId === "8" ? robotStatus[0].status : "#F9E79F"}
+              fill={selectedId === 8 ? robotStatus[0].status : "#F9E79F"}
               id="8"
             ></Rect>
           </Layer>
@@ -239,7 +239,7 @@ for (let index = 0; index < robotStatus.length; index++) {
               width={200}
               height={200}
               onClick={highlightHandler}
-              fill={selectedId === "9" ? robotStatus[1].status : "#F9E79F"}
+              fill={selectedId === 9 ? robotStatus[1].status : "#F9E79F"}
               id="9"
             ></Rect>
           </Layer>
